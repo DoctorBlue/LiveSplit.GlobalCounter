@@ -65,7 +65,7 @@
     <Compile Include="SetCount.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveSplit.GlobalCounter.csproj">
+    <ProjectReference Include="..\LiveSplit.GlobalCounter\LiveSplit.GlobalCounter.csproj">
       <Project>{ca2c668c-1c3f-4c44-9034-99848afe47ba}</Project>
       <Name>LiveSplit.GlobalCounter</Name>
     </ProjectReference>
