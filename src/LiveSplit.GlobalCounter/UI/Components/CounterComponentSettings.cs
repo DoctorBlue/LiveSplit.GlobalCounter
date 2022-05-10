@@ -264,6 +264,19 @@ namespace LiveSplit.UI.Components
                 Hook.RegisterHotKey(IncrementKey);
                 Hook.RegisterHotKey(DecrementKey);
                 Hook.RegisterHotKey(ResetKey);
+
+                if (NumberPadEnabled)
+                {
+                    Hook.RegisterHotKey(Keys.NumPad1);
+                    Hook.RegisterHotKey(Keys.NumPad2);
+                    Hook.RegisterHotKey(Keys.NumPad3);
+                    Hook.RegisterHotKey(Keys.NumPad4);
+                    Hook.RegisterHotKey(Keys.NumPad5);
+                    Hook.RegisterHotKey(Keys.NumPad6);
+                    Hook.RegisterHotKey(Keys.NumPad7);
+                    Hook.RegisterHotKey(Keys.NumPad8);
+                    Hook.RegisterHotKey(Keys.NumPad9);
+                }
             }
             catch (Exception ex)
             {

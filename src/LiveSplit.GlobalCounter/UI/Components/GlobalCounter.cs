@@ -32,7 +32,7 @@
 
         public override bool Increment(int amount)
         {
-            Count = (Count + increment) % 10;
+            Count = (Count + amount) % 10;
             return true;
         }
     }
