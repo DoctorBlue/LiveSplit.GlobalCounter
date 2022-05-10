@@ -1,6 +1,6 @@
 ﻿namespace LiveSplit.UI.Components
 {
-    public class GlobalCounter : Counter
+    public sealed class GlobalCounter : Counter
     {
         public GlobalCounter(int initialValue = 0) : base(initialValue)
         { }
@@ -28,7 +28,9 @@
             return true;
         }
 
-        public override bool Increment()
+        public override bool Increment() => Increment(increment);
+
+        public override bool Increment(int amount)
         {
             Count = (Count + increment) % 10;
             return true;

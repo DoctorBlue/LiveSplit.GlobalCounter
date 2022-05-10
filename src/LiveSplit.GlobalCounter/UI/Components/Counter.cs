@@ -40,6 +40,16 @@
             return true;
         }
 
+        public virtual bool Increment(int amount)
+        {
+            int initialValueToSave = initialValue;
+            initialValue = amount;
+            bool incrementResult = Increment();
+            initialValue = initialValueToSave;
+
+            return incrementResult;
+        }
+
         /// <summary>
         /// Decrements this instance.
         /// </summary>
@@ -92,6 +102,7 @@
         int Count { get; }
 
         bool Increment();
+        bool Increment(int amount);
         bool Decrement();
         void Reset();
         void SetCount(int value);

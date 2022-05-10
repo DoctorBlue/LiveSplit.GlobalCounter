@@ -207,8 +207,8 @@ namespace LiveSplit.UI.Components
 
             if (Settings.NumberPadEnabled && e.NumberPadKeyPressed())
             {
-                throw new NotImplementedException("Increment Counter by NumPad key pressed.");
-                // return;
+                Counter.Increment(e.GetNumberPressed());
+                return;
             }
             if (e == Settings.IncrementKey)
             {
