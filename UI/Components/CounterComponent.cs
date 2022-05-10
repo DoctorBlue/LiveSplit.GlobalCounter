@@ -1,11 +1,11 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.Model.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using LiveSplit.Model.Input;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace LiveSplit.UI.Components
 {
@@ -17,7 +17,7 @@ namespace LiveSplit.UI.Components
             Settings = new CounterComponentSettings(state.Settings.HotkeyProfiles.First().Value.AllowGamepadsAsHotkeys);
             Cache = new GraphicsCache();
             CounterNameLabel = new SimpleLabel();
-            Counter = new Counter();
+            Counter = new GlobalCounter();
             this.state = state;
             Settings.CounterReinitialiseRequired += Settings_CounterReinitialiseRequired;
             Settings.IncrementUpdateRequired += Settings_IncrementUpdateRequired;
@@ -136,27 +136,16 @@ namespace LiveSplit.UI.Components
             DrawGeneral(g, state, width, VerticalHeight, LayoutMode.Vertical);
         }
 
-        public string ComponentName
-        {
-            get { return "Counter"; }
-        }
-
-        public Control GetSettingsControl(LayoutMode mode)
-        {
-            return Settings;
-        }
-
-        public System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document)
-        {
-            return Settings.GetSettings(document);
-        }
+        public string ComponentName => "Global Counter";
+        public Control GetSettingsControl(LayoutMode mode) => Settings;
+        public System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document) => Settings.GetSettings(document);
 
         public void SetSettings(System.Xml.XmlNode settings)
         {
             Settings.SetSettings(settings);
 
             // Initialise Counter from settings.
-            Counter = new Counter(Settings.InitialValue, Settings.Increment);
+            Counter = new GlobalCounter(Settings.InitialValue);
         }
 
         public void Update(IInvalidator invalidator, Model.LiveSplitState state, float width, float height, LayoutMode mode)
@@ -198,7 +187,7 @@ namespace LiveSplit.UI.Components
         /// </summary>
         private void Settings_CounterReinitialiseRequired(object sender, EventArgs e)
         {
-            Counter = new Counter(Settings.InitialValue, Settings.Increment);
+            Counter = new GlobalCounter(Settings.InitialValue);
         }
 
         private void Settings_IncrementUpdateRequired(object sender, EventArgs e)
