@@ -1,14 +1,9 @@
-﻿using LiveSplit.Options;
+﻿using LiveSplit.Model.Input;
+using LiveSplit.Options;
 using System;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using LiveSplit.Model.Input;
-using System.Threading;
 
 namespace LiveSplit.UI.Components
 {
@@ -21,6 +16,7 @@ namespace LiveSplit.UI.Components
             Hook = new CompositeHook(allowGamepads);
 
             // Set default values.
+            NumberPadEnabled = false;
             GlobalHotkeysEnabled = false;
             CounterFont = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
             OverrideCounterFont = false;
@@ -66,6 +62,7 @@ namespace LiveSplit.UI.Components
 
         public CompositeHook Hook { get; set; }
 
+        public bool NumberPadEnabled { get; set; }
         public bool GlobalHotkeysEnabled { get; set; }
 
         public Color CounterTextColor { get; set; }
@@ -99,6 +96,7 @@ namespace LiveSplit.UI.Components
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
+            NumberPadEnabled = SettingsHelper.ParseBool(element[nameof(NumberPadEnabled)]);
             GlobalHotkeysEnabled = SettingsHelper.ParseBool(element["GlobalHotkeysEnabled"]);
             CounterTextColor = SettingsHelper.ParseColor(element["CounterTextColor"]);
             CounterValueColor = SettingsHelper.ParseColor(element["CounterValueColor"]);
@@ -137,6 +135,7 @@ namespace LiveSplit.UI.Components
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
             return SettingsHelper.CreateSetting(document, parent, "Version", "1.0") ^
+            SettingsHelper.CreateSetting(document, parent, nameof(NumberPadEnabled), NumberPadEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "GlobalHotkeysEnabled", GlobalHotkeysEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideCounterFont", OverrideCounterFont) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor) ^

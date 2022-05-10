@@ -204,6 +204,7 @@ namespace LiveSplit.UI.Components
             {
                 return;
             }
+
             if (e == Settings.IncrementKey)
             {
                 Counter.Increment();
