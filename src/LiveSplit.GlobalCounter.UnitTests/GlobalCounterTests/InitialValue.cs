@@ -3,7 +3,7 @@ using System;
 using System.Reflection;
 using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounter.UnitTests.GlobalCounterTests
 {
     public class InitialValue
     {
@@ -11,7 +11,7 @@ namespace LiveSplit.GlobalCounterTests
         public void CanBeSetInConstructor()
         {
             var expected = 5;
-            var counter = new GlobalCounter(expected);
+            var counter = new UI.Components.GlobalCounter(expected);
 
             var actual = GetInitialValue(counter);
 
@@ -21,7 +21,7 @@ namespace LiveSplit.GlobalCounterTests
         [Fact]
         public void ShouldWrapTo0WhenIncrementingPast9AfterSetting()
         {
-            var counter = new GlobalCounter(5);
+            var counter = new UI.Components.GlobalCounter(5);
 
             counter.Increment();
             counter.Increment();
@@ -35,7 +35,7 @@ namespace LiveSplit.GlobalCounterTests
         [Fact]
         public void ShouldWrapTo9WhenDecrementingPast0AfterSetting()
         {
-            var counter = new GlobalCounter(3);
+            var counter = new UI.Components.GlobalCounter(3);
 
             counter.Decrement();
             counter.Decrement();
@@ -45,13 +45,13 @@ namespace LiveSplit.GlobalCounterTests
             Assert.Equal(9, counter.Count);
         }
 
-        private static int GetInitialValue(GlobalCounter counter)
+        private static int GetInitialValue(UI.Components.GlobalCounter counter)
         {
             const string fieldName = "initialValue";
             var prop = typeof(Counter).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
             if (prop == null)
             {
-                throw new InvalidOperationException($"Could not find \"{fieldName}\" field on {nameof(GlobalCounter)} class.");
+                throw new InvalidOperationException($"Could not find \"{fieldName}\" field on {nameof(UI.Components.GlobalCounter)} class.");
             }
 
             int actual = (int) prop.GetValue(counter);

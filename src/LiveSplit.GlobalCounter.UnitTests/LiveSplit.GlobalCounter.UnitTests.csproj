@@ -9,8 +9,8 @@
     <ProjectGuid>{30EA406F-E819-4FB0-AA54-B59A660A83A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiveSplit.GlobalCounterTests</RootNamespace>
-    <AssemblyName>LiveSplit.GlobalCounterTests</AssemblyName>
+    <RootNamespace>LiveSplit.GlobalCounter.UnitTests</RootNamespace>
+    <AssemblyName>LiveSplit.GlobalCounter.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,11 +58,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decrement.cs" />
-    <Compile Include="Increment.cs" />
+    <Compile Include="GlobalCounterTests\Decrement.cs" />
+    <Compile Include="GlobalCounterTests\Increment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InitialValue.cs" />
-    <Compile Include="SetCount.cs" />
+    <Compile Include="GlobalCounterTests\InitialValue.cs" />
+    <Compile Include="GlobalCounterTests\SetCount.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveSplit.GlobalCounter\LiveSplit.GlobalCounter.csproj">
@@ -76,6 +76,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

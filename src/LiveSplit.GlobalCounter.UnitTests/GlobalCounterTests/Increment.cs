@@ -1,7 +1,6 @@
-﻿using LiveSplit.UI.Components;
-using Xunit;
+﻿using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounter.UnitTests.GlobalCounterTests
 {
     public class Increment
     {
@@ -19,7 +18,7 @@ namespace LiveSplit.GlobalCounterTests
         [InlineData(99, 8)]
         public void WrapsIncrementsOver9ToGlobalRange(int incrementAmount, int expectedCount)
         {
-            var counter = new GlobalCounter();
+            var counter = new UI.Components.GlobalCounter();
             counter.SetCount(9);
             counter.SetIncrement(incrementAmount);
 

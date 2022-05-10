@@ -1,7 +1,6 @@
-﻿using LiveSplit.UI.Components;
-using Xunit;
+﻿using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounter.UnitTests.GlobalCounterTests
 {
     public class SetCount
     {
@@ -18,7 +17,7 @@ namespace LiveSplit.GlobalCounterTests
         [InlineData(9)]
         public void SetsToProvidedCountInGlobalRange(int expectedCount)
         {
-            var counter = new GlobalCounter();
+            var counter = new UI.Components.GlobalCounter();
             
             counter.SetCount(expectedCount);
 
@@ -32,7 +31,7 @@ namespace LiveSplit.GlobalCounterTests
         public void RaisesNegativeValueTo0(int negativeValue)
         {
             const int expectedCount = 0;
-            var counter = new GlobalCounter();
+            var counter = new UI.Components.GlobalCounter();
 
             counter.SetCount(negativeValue);
 
@@ -46,7 +45,7 @@ namespace LiveSplit.GlobalCounterTests
         public void LowersValuesOver9To9(int bigValue)
         {
             const int expectedCount = 9;
-            var counter = new GlobalCounter();
+            var counter = new UI.Components.GlobalCounter();
 
             counter.SetCount(bigValue);
 

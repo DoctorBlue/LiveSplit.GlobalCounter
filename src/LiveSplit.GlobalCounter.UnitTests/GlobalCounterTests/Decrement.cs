@@ -1,7 +1,6 @@
-﻿using LiveSplit.UI.Components;
-using Xunit;
+﻿using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounter.UnitTests.GlobalCounterTests
 {
     public class Decrement
     {
@@ -19,7 +18,7 @@ namespace LiveSplit.GlobalCounterTests
         [InlineData(99, 1)]
         public void WrapsNegativeResultToGlobalRange(int decrementAmount, int expectedCount)
         {
-            var counter = new GlobalCounter();
+            var counter = new UI.Components.GlobalCounter();
             counter.SetIncrement(decrementAmount);
             
             counter.Decrement();
