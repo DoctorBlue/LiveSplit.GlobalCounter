@@ -3,7 +3,7 @@ using System;
 using System.Reflection;
 using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
 {
     public class InitialValue
     {

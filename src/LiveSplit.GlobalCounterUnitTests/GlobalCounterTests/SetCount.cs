@@ -1,7 +1,7 @@
 ﻿using LiveSplit.UI.Components;
 using Xunit;
 
-namespace LiveSplit.GlobalCounterTests
+namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
 {
     public class SetCount
     {
