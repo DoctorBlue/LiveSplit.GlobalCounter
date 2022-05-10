@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace LiveSplit.GlobalCounter.UnitTests.GlobalCounterTests
+namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
 {
     public class Increment
     {

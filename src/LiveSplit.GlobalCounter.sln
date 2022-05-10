@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.GlobalCounter", "LiveSplit.GlobalCounter\LiveSplit.GlobalCounter.csproj", "{CA2C668C-1C3F-4C44-9034-99848AFE47BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.GlobalCounter.UnitTests", "LiveSplit.GlobalCounter.UnitTests\LiveSplit.GlobalCounter.UnitTests.csproj", "{30EA406F-E819-4FB0-AA54-B59A660A83A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.GlobalCounterUnitTests", "LiveSplit.GlobalCounterUnitTests\LiveSplit.GlobalCounterUnitTests.csproj", "{30EA406F-E819-4FB0-AA54-B59A660A83A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

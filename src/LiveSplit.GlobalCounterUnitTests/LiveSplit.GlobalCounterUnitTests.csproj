@@ -9,8 +9,8 @@
     <ProjectGuid>{30EA406F-E819-4FB0-AA54-B59A660A83A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiveSplit.GlobalCounter.UnitTests</RootNamespace>
-    <AssemblyName>LiveSplit.GlobalCounter.UnitTests</AssemblyName>
+    <RootNamespace>LiveSplit.GlobalCounterUnitTests</RootNamespace>
+    <AssemblyName>LiveSplit.GlobalCounterUnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
