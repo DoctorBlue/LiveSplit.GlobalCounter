@@ -198,19 +198,23 @@ namespace LiveSplit.UI.Components
         // Basic support for keyboard/button input.
         private void hook_KeyOrButtonPressed(object sender, KeyOrButton e)
         {
-            if ((Form.ActiveForm == state.Form && !Settings.GlobalHotkeysEnabled)
-                || Settings.GlobalHotkeysEnabled)
+            bool liveSplitWindowInFocus = Form.ActiveForm == state.Form && !Settings.GlobalHotkeysEnabled;
+            bool listenForKeyPresses = liveSplitWindowInFocus || Settings.GlobalHotkeysEnabled;
+            if (!listenForKeyPresses)
             {
-                if (e == Settings.IncrementKey)
-                    Counter.Increment();
-
-                if (e == Settings.DecrementKey)
-                    Counter.Decrement();
-
-                if (e == Settings.ResetKey)
-                {
-                    Counter.Reset();
-                }
+                return;
+            }
+            if (e == Settings.IncrementKey)
+            {
+                Counter.Increment();
+            }
+            if (e == Settings.DecrementKey)
+            {
+                Counter.Decrement();
+            }
+            if (e == Settings.ResetKey)
+            {
+                Counter.Reset();
             }
         }
     }
