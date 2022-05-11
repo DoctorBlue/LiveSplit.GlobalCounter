@@ -28,7 +28,6 @@ namespace LiveSplit.UI.Components
             BackgroundGradient = GradientType.Plain;
             CounterText = "Counter:";
             InitialValue = 0;
-            Increment = 1;
 
             // Hotkeys
             IncrementKey = new KeyOrButton(Keys.Add);
@@ -85,7 +84,6 @@ namespace LiveSplit.UI.Components
 
         public string CounterText { get; set; }
         public int InitialValue { get; set; }
-        public int Increment { get; set; }
 
         public KeyOrButton IncrementKey { get; set; }
         public KeyOrButton DecrementKey { get; set; }
@@ -108,7 +106,6 @@ namespace LiveSplit.UI.Components
             GradientString = SettingsHelper.ParseString(element["BackgroundGradient"]);
             CounterText = SettingsHelper.ParseString(element["CounterText"]);
             InitialValue = SettingsHelper.ParseInt(element["InitialValue"]);
-            Increment = SettingsHelper.ParseInt(element["Increment"]);
 
             XmlElement incrementElement = element["IncrementKey"];
             IncrementKey = !string.IsNullOrEmpty(incrementElement?.InnerText) ? new KeyOrButton(incrementElement.InnerText) : null;
@@ -147,7 +144,6 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient) ^
             SettingsHelper.CreateSetting(document, parent, "CounterText", CounterText) ^
             SettingsHelper.CreateSetting(document, parent, "InitialValue", InitialValue) ^
-            SettingsHelper.CreateSetting(document, parent, "Increment", Increment) ^
             SettingsHelper.CreateSetting(document, parent, "IncrementKey", IncrementKey) ^
             SettingsHelper.CreateSetting(document, parent, "DecrementKey", DecrementKey) ^
             SettingsHelper.CreateSetting(document, parent, "ResetKey", ResetKey);
