@@ -48,6 +48,7 @@
             this.btnColor2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtShowDropGroupsInstruction = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtIncrement = new System.Windows.Forms.TextBox();
@@ -63,6 +64,7 @@
             this.chkGlobalHotKeys = new System.Windows.Forms.CheckBox();
             this.chkNumberPadEnabled = new System.Windows.Forms.CheckBox();
             this.txtNumPadIncrementInstruction = new System.Windows.Forms.Label();
+            this.chkShowDropGroupsEnabled = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -97,7 +99,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(442, 448);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(442, 474);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox2
@@ -321,7 +323,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 226);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(436, 219);
+            this.groupBox4.Size = new System.Drawing.Size(436, 245);
             this.groupBox4.TabIndex = 42;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Counter";
@@ -331,7 +333,8 @@
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.44F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.56F));
-            this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 4);
+            this.tableLayoutPanel5.Controls.Add(this.txtShowDropGroupsInstruction, 1, 4);
+            this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 5);
             this.tableLayoutPanel5.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.txtCounterText, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label4, 0, 1);
@@ -339,27 +342,39 @@
             this.tableLayoutPanel5.Controls.Add(this.chkGlobalHotKeys, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.chkNumberPadEnabled, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.txtNumPadIncrementInstruction, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.chkShowDropGroupsEnabled, 0, 4);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 5;
+            this.tableLayoutPanel5.RowCount = 6;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(430, 200);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(430, 226);
             this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // txtShowDropGroupsInstruction
+            // 
+            this.txtShowDropGroupsInstruction.AutoSize = true;
+            this.txtShowDropGroupsInstruction.Location = new System.Drawing.Point(142, 104);
+            this.txtShowDropGroupsInstruction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.txtShowDropGroupsInstruction.Name = "txtShowDropGroupsInstruction";
+            this.txtShowDropGroupsInstruction.Size = new System.Drawing.Size(160, 13);
+            this.txtShowDropGroupsInstruction.TabIndex = 49;
+            this.txtShowDropGroupsInstruction.Text = "Display item drops next to count.";
             // 
             // groupBox3
             // 
             this.tableLayoutPanel5.SetColumnSpan(this.groupBox3, 2);
             this.groupBox3.Controls.Add(this.tableLayoutPanel4);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 103);
+            this.groupBox3.Location = new System.Drawing.Point(3, 128);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(424, 94);
+            this.groupBox3.Size = new System.Drawing.Size(424, 95);
             this.groupBox3.TabIndex = 41;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hotkeys";
@@ -382,7 +397,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(418, 75);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(418, 76);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // txtIncrement
@@ -527,6 +542,16 @@
             this.txtNumPadIncrementInstruction.TabIndex = 47;
             this.txtNumPadIncrementInstruction.Text = "Increment 1-9. Overrides hotkeys set to NumPad1-9.";
             // 
+            // chkShowDropGroupsEnabled
+            // 
+            this.chkShowDropGroupsEnabled.AutoSize = true;
+            this.chkShowDropGroupsEnabled.Location = new System.Drawing.Point(3, 103);
+            this.chkShowDropGroupsEnabled.Name = "chkShowDropGroupsEnabled";
+            this.chkShowDropGroupsEnabled.Size = new System.Drawing.Size(116, 17);
+            this.chkShowDropGroupsEnabled.TabIndex = 48;
+            this.chkShowDropGroupsEnabled.Text = "Show Drop Groups";
+            this.chkShowDropGroupsEnabled.UseVisualStyleBackColor = true;
+            // 
             // CounterComponentSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,7 +559,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CounterComponentSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(456, 462);
+            this.Size = new System.Drawing.Size(456, 488);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -591,5 +616,7 @@
         private System.Windows.Forms.TextBox txtReset;
         private System.Windows.Forms.CheckBox chkNumberPadEnabled;
         private System.Windows.Forms.Label txtNumPadIncrementInstruction;
+        private System.Windows.Forms.CheckBox chkShowDropGroupsEnabled;
+        private System.Windows.Forms.Label txtShowDropGroupsInstruction;
     }
 }
