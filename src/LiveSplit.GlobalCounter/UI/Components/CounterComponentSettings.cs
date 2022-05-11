@@ -1,14 +1,9 @@
-﻿using LiveSplit.Options;
+﻿using LiveSplit.Model.Input;
+using LiveSplit.Options;
 using System;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using LiveSplit.Model.Input;
-using System.Threading;
 
 namespace LiveSplit.UI.Components
 {
@@ -21,6 +16,7 @@ namespace LiveSplit.UI.Components
             Hook = new CompositeHook(allowGamepads);
 
             // Set default values.
+            NumberPadEnabled = false;
             GlobalHotkeysEnabled = false;
             CounterFont = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
             OverrideCounterFont = false;
@@ -32,7 +28,6 @@ namespace LiveSplit.UI.Components
             BackgroundGradient = GradientType.Plain;
             CounterText = "Counter:";
             InitialValue = 0;
-            Increment = 1;
 
             // Hotkeys
             IncrementKey = new KeyOrButton(Keys.Add);
@@ -42,8 +37,8 @@ namespace LiveSplit.UI.Components
             // Set bindings.
             txtCounterText.DataBindings.Add("Text", this, "CounterText");
             numInitialValue.DataBindings.Add("Value", this, "InitialValue");
-            numIncrement.DataBindings.Add("Value", this, "Increment");
             chkGlobalHotKeys.DataBindings.Add("Checked", this, "GlobalHotkeysEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkNumberPadEnabled.DataBindings.Add("Checked", this, nameof(NumberPadEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             chkFont.DataBindings.Add("Checked", this, "OverrideCounterFont", false, DataSourceUpdateMode.OnPropertyChanged);
             lblFont.DataBindings.Add("Text", this, "CounterFontString", false, DataSourceUpdateMode.OnPropertyChanged);
             chkColor.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -58,6 +53,7 @@ namespace LiveSplit.UI.Components
             chkFont.CheckedChanged += chkFont_CheckedChanged;
             chkColor.CheckedChanged += chkColor_CheckedChanged;
             chkGlobalHotKeys.CheckedChanged += chkGlobalHotKeys_CheckedChanged;
+            chkNumberPadEnabled.CheckedChanged += chkNumberPadEnabled_CheckedChanged;
 
             Load += CounterSettings_Load;
 
@@ -66,39 +62,39 @@ namespace LiveSplit.UI.Components
 
         public CompositeHook Hook { get; set; }
 
+        public bool NumberPadEnabled { get; set; }
         public bool GlobalHotkeysEnabled { get; set; }
 
         public Color CounterTextColor { get; set; }
         public Color CounterValueColor { get; set; }
         public bool OverrideTextColor { get; set; }
 
-        public string CounterFontString { get { return String.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style); } }
+        public string CounterFontString => $"{CounterFont.FontFamily.Name} {CounterFont.Style}";
         public Font CounterFont { get; set; }
         public bool OverrideCounterFont { get; set; }
 
         public Color BackgroundColor { get; set; }
         public Color BackgroundColor2 { get; set; }
         public GradientType BackgroundGradient { get; set; }
-        public String GradientString
+        public string GradientString
         {
-            get { return BackgroundGradient.ToString(); }
-            set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
+            get => BackgroundGradient.ToString();
+            set => BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value);
         }
 
         public string CounterText { get; set; }
         public int InitialValue { get; set; }
-        public int Increment { get; set; }
 
         public KeyOrButton IncrementKey { get; set; }
         public KeyOrButton DecrementKey { get; set; }
         public KeyOrButton ResetKey { get; set; }
 
         public event EventHandler CounterReinitialiseRequired;
-        public event EventHandler IncrementUpdateRequired;
 
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
+            NumberPadEnabled = SettingsHelper.ParseBool(element[nameof(NumberPadEnabled)]);
             GlobalHotkeysEnabled = SettingsHelper.ParseBool(element["GlobalHotkeysEnabled"]);
             CounterTextColor = SettingsHelper.ParseColor(element["CounterTextColor"]);
             CounterValueColor = SettingsHelper.ParseColor(element["CounterValueColor"]);
@@ -110,14 +106,13 @@ namespace LiveSplit.UI.Components
             GradientString = SettingsHelper.ParseString(element["BackgroundGradient"]);
             CounterText = SettingsHelper.ParseString(element["CounterText"]);
             InitialValue = SettingsHelper.ParseInt(element["InitialValue"]);
-            Increment = SettingsHelper.ParseInt(element["Increment"]);
 
             XmlElement incrementElement = element["IncrementKey"];
-            IncrementKey = string.IsNullOrEmpty(incrementElement.InnerText) ? null : new KeyOrButton(incrementElement.InnerText);
+            IncrementKey = !string.IsNullOrEmpty(incrementElement?.InnerText) ? new KeyOrButton(incrementElement.InnerText) : null;
             XmlElement decrementElement = element["DecrementKey"];
-            DecrementKey = string.IsNullOrEmpty(decrementElement.InnerText) ? null : new KeyOrButton(decrementElement.InnerText);
+            DecrementKey = !string.IsNullOrEmpty(decrementElement?.InnerText) ? new KeyOrButton(decrementElement.InnerText) : null;
             XmlElement resetElement = element["ResetKey"];
-            ResetKey = string.IsNullOrEmpty(resetElement.InnerText) ? null : new KeyOrButton(resetElement.InnerText);
+            ResetKey = !string.IsNullOrEmpty(resetElement?.InnerText) ? new KeyOrButton(resetElement.InnerText) : null;
 
             RegisterHotKeys();
         }
@@ -137,6 +132,7 @@ namespace LiveSplit.UI.Components
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
             return SettingsHelper.CreateSetting(document, parent, "Version", "1.0") ^
+            SettingsHelper.CreateSetting(document, parent, nameof(NumberPadEnabled), NumberPadEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "GlobalHotkeysEnabled", GlobalHotkeysEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideCounterFont", OverrideCounterFont) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor) ^
@@ -148,7 +144,6 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient) ^
             SettingsHelper.CreateSetting(document, parent, "CounterText", CounterText) ^
             SettingsHelper.CreateSetting(document, parent, "InitialValue", InitialValue) ^
-            SettingsHelper.CreateSetting(document, parent, "Increment", Increment) ^
             SettingsHelper.CreateSetting(document, parent, "IncrementKey", IncrementKey) ^
             SettingsHelper.CreateSetting(document, parent, "DecrementKey", DecrementKey) ^
             SettingsHelper.CreateSetting(document, parent, "ResetKey", ResetKey);
@@ -161,22 +156,8 @@ namespace LiveSplit.UI.Components
             txtBox.Text = "Set Hotkey...";
             txtBox.Select(0, 0);
 
-            KeyEventHandler handlerDown = null;
-            KeyEventHandler handlerUp = null;
-            EventHandler leaveHandler = null;
-            EventHandlerT<GamepadButton> gamepadButtonPressed = null;
-
-            // Remove Input handlers.
-            Action unregisterEvents = () =>
-            {
-                txtBox.KeyDown -= handlerDown;
-                txtBox.KeyUp -= handlerUp;
-                txtBox.Leave -= leaveHandler;
-                Hook.AnyGamepadButtonPressed -= gamepadButtonPressed;
-            };
-
             // Handler for KeyDown
-            handlerDown = (s, x) =>
+            KeyEventHandler handlerDown = (s, x) =>
             {
                 KeyOrButton keyOrButton = x.KeyCode == Keys.Escape ? null : new KeyOrButton(x.KeyCode | x.Modifiers);
 
@@ -185,7 +166,6 @@ namespace LiveSplit.UI.Components
                     return;
 
                 keySetCallback(keyOrButton);
-                unregisterEvents();
 
                 // Remove Focus.
                 txtBox.Select(0, 0);
@@ -198,7 +178,7 @@ namespace LiveSplit.UI.Components
             };
 
             // Handler for KeyUp (allows setting of special keys, shift, ctrl etc.).
-            handlerUp = (s, x) =>
+            KeyEventHandler handlerUp = (s, x) =>
             {
                 KeyOrButton keyOrButton = x.KeyCode == Keys.Escape ? null : new KeyOrButton(x.KeyCode | x.Modifiers);
 
@@ -207,25 +187,22 @@ namespace LiveSplit.UI.Components
                     return;
 
                 keySetCallback(keyOrButton);
-                unregisterEvents();
                 txtBox.Select(0, 0);
                 chkGlobalHotKeys.Select();
                 txtBox.Text = FormatKey(keyOrButton);
                 RegisterHotKeys();
             };
 
-            leaveHandler = (s, x) =>
+            EventHandler leaveHandler = (s, x) =>
             {
-                unregisterEvents();
                 txtBox.Text = oldText;
             };
 
             // Handler for gamepad/joystick inputs.
-            gamepadButtonPressed = (s, x) =>
+            EventHandlerT<GamepadButton> gamepadButtonPressed = (s, x) =>
             {
                 KeyOrButton key = new KeyOrButton(x);
                 keySetCallback(key);
-                unregisterEvents();
 
                 Action keyOrButton = () =>
                 {
@@ -265,6 +242,19 @@ namespace LiveSplit.UI.Components
                 Hook.RegisterHotKey(IncrementKey);
                 Hook.RegisterHotKey(DecrementKey);
                 Hook.RegisterHotKey(ResetKey);
+
+                if (NumberPadEnabled)
+                {
+                    Hook.RegisterHotKey(Keys.NumPad1);
+                    Hook.RegisterHotKey(Keys.NumPad2);
+                    Hook.RegisterHotKey(Keys.NumPad3);
+                    Hook.RegisterHotKey(Keys.NumPad4);
+                    Hook.RegisterHotKey(Keys.NumPad5);
+                    Hook.RegisterHotKey(Keys.NumPad6);
+                    Hook.RegisterHotKey(Keys.NumPad7);
+                    Hook.RegisterHotKey(Keys.NumPad8);
+                    Hook.RegisterHotKey(Keys.NumPad9);
+                }
             }
             catch (Exception ex)
             {
@@ -319,16 +309,23 @@ namespace LiveSplit.UI.Components
             label3.Enabled = btnColor.Enabled = label5.Enabled = btnColor3.Enabled = chkColor.Checked;
         }
 
-        void chkFont_CheckedChanged(object sender, EventArgs e)
+        private void chkFont_CheckedChanged(object sender, EventArgs e)
         {
             label1.Enabled = lblFont.Enabled = btnFont.Enabled = chkFont.Checked;
         }
-        void chkGlobalHotKeys_CheckedChanged(object sender, EventArgs e)
+
+        private void chkGlobalHotKeys_CheckedChanged(object sender, EventArgs e)
         {
             GlobalHotkeysEnabled = chkGlobalHotKeys.Checked;
         }
 
-        void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
+        private void chkNumberPadEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            NumberPadEnabled = chkNumberPadEnabled.Checked;
+            RegisterHotKeys();
+        }
+
+        private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnColor1.Visible = cmbGradientType.SelectedItem.ToString() != "Plain";
             btnColor2.DataBindings.Clear();
@@ -370,12 +367,6 @@ namespace LiveSplit.UI.Components
         {
             InitialValue = (int)Math.Round(numInitialValue.Value, 0);
             CounterReinitialiseRequired(this, EventArgs.Empty);
-        }
-
-        private void numIncrement_ValueChanged(object sender, EventArgs e)
-        {
-            Increment = (int)Math.Round(numIncrement.Value, 0);
-            IncrementUpdateRequired(this, EventArgs.Empty);
         }
     }
 }

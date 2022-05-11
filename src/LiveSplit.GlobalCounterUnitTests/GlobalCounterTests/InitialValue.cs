@@ -23,11 +23,11 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
         {
             var counter = new GlobalCounter(5);
 
-            counter.Increment();
-            counter.Increment();
-            counter.Increment();
-            counter.Increment();
-            counter.Increment();
+            counter.Increment(1);
+            counter.Increment(1);
+            counter.Increment(1);
+            counter.Increment(1);
+            counter.Increment(1);
 
             Assert.Equal(0, counter.Count);
         }
@@ -47,8 +47,8 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
 
         private static int GetInitialValue(GlobalCounter counter)
         {
-            const string fieldName = "initialValue";
-            var prop = typeof(Counter).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            const string fieldName = "_initialValue";
+            var prop = typeof(GlobalCounter).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
             if (prop == null)
             {
                 throw new InvalidOperationException($"Could not find \"{fieldName}\" field on {nameof(GlobalCounter)} class.");
