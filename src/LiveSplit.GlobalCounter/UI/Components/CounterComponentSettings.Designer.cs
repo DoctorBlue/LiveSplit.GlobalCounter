@@ -56,13 +56,12 @@
             this.lblCounterReset = new System.Windows.Forms.Label();
             this.txtDecrement = new System.Windows.Forms.TextBox();
             this.txtReset = new System.Windows.Forms.TextBox();
-            this.chkGlobalHotKeys = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCounterText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numInitialValue = new System.Windows.Forms.NumericUpDown();
-            this.lblIncrementValue = new System.Windows.Forms.Label();
-            this.numIncrement = new System.Windows.Forms.NumericUpDown();
+            this.chkGlobalHotKeys = new System.Windows.Forms.CheckBox();
+            this.chkNumberPadEnabled = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -73,7 +72,6 @@
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numInitialValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numIncrement)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -333,13 +331,12 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.44F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.56F));
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.chkGlobalHotKeys, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.txtCounterText, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label4, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.numInitialValue, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.lblIncrementValue, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.numIncrement, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.chkGlobalHotKeys, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.chkNumberPadEnabled, 0, 2);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -348,6 +345,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(430, 200);
             this.tableLayoutPanel5.TabIndex = 0;
@@ -402,9 +400,9 @@
             this.lblCounterIncrement.AutoSize = true;
             this.lblCounterIncrement.Location = new System.Drawing.Point(3, 6);
             this.lblCounterIncrement.Name = "lblCounterIncrement";
-            this.lblCounterIncrement.Size = new System.Drawing.Size(97, 13);
+            this.lblCounterIncrement.Size = new System.Drawing.Size(118, 13);
             this.lblCounterIncrement.TabIndex = 1;
-            this.lblCounterIncrement.Text = "Increment Counter:";
+            this.lblCounterIncrement.Text = "Increment Counter (+1):";
             // 
             // lblCounterDecrement
             // 
@@ -412,9 +410,9 @@
             this.lblCounterDecrement.AutoSize = true;
             this.lblCounterDecrement.Location = new System.Drawing.Point(3, 31);
             this.lblCounterDecrement.Name = "lblCounterDecrement";
-            this.lblCounterDecrement.Size = new System.Drawing.Size(102, 13);
+            this.lblCounterDecrement.Size = new System.Drawing.Size(120, 13);
             this.lblCounterDecrement.TabIndex = 2;
-            this.lblCounterDecrement.Text = "Decrement Counter:";
+            this.lblCounterDecrement.Text = "Decrement Counter (-1):";
             // 
             // lblCounterReset
             // 
@@ -447,18 +445,6 @@
             this.txtReset.TabIndex = 5;
             this.txtReset.Enter += new System.EventHandler(this.txtReset_Enter);
             this.txtReset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReset_KeyDown);
-            // 
-            // chkGlobalHotKeys
-            // 
-            this.chkGlobalHotKeys.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.chkGlobalHotKeys, 2);
-            this.chkGlobalHotKeys.Location = new System.Drawing.Point(7, 78);
-            this.chkGlobalHotKeys.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.chkGlobalHotKeys.Name = "chkGlobalHotKeys";
-            this.chkGlobalHotKeys.Size = new System.Drawing.Size(138, 17);
-            this.chkGlobalHotKeys.TabIndex = 5;
-            this.chkGlobalHotKeys.Text = "Global Counter Hotkeys";
-            this.chkGlobalHotKeys.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -507,34 +493,29 @@
             this.numInitialValue.TabIndex = 45;
             this.numInitialValue.ValueChanged += new System.EventHandler(this.numInitialValue_ValueChanged);
             // 
-            // lblIncrementValue
+            // chkGlobalHotKeys
             // 
-            this.lblIncrementValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblIncrementValue.AutoSize = true;
-            this.lblIncrementValue.Location = new System.Drawing.Point(3, 56);
-            this.lblIncrementValue.Name = "lblIncrementValue";
-            this.lblIncrementValue.Size = new System.Drawing.Size(87, 13);
-            this.lblIncrementValue.TabIndex = 46;
-            this.lblIncrementValue.Text = "Increment Value:";
+            this.chkGlobalHotKeys.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.chkGlobalHotKeys, 2);
+            this.chkGlobalHotKeys.Location = new System.Drawing.Point(7, 78);
+            this.chkGlobalHotKeys.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkGlobalHotKeys.Name = "chkGlobalHotKeys";
+            this.chkGlobalHotKeys.Size = new System.Drawing.Size(138, 17);
+            this.chkGlobalHotKeys.TabIndex = 5;
+            this.chkGlobalHotKeys.Text = "Global Counter Hotkeys";
+            this.chkGlobalHotKeys.UseVisualStyleBackColor = true;
             // 
-            // numIncrement
+            // chkNumberPadEnabled
             // 
-            this.numIncrement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numIncrement.Location = new System.Drawing.Point(142, 53);
-            this.numIncrement.Maximum = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.numIncrement.Name = "numIncrement";
-            this.numIncrement.Size = new System.Drawing.Size(285, 20);
-            this.numIncrement.TabIndex = 47;
-            this.numIncrement.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numIncrement.ValueChanged += new System.EventHandler(this.numIncrement_ValueChanged);
+            this.chkNumberPadEnabled.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.chkNumberPadEnabled, 2);
+            this.chkNumberPadEnabled.Location = new System.Drawing.Point(3, 53);
+            this.chkNumberPadEnabled.Name = "chkNumberPadEnabled";
+            this.chkNumberPadEnabled.Size = new System.Drawing.Size(148, 17);
+            this.chkNumberPadEnabled.TabIndex = 46;
+            this.chkNumberPadEnabled.Text = "Enable Number Pad Entry";
+            this.chkNumberPadEnabled.UseVisualStyleBackColor = true;
+            this.chkNumberPadEnabled.CheckedChanged += new System.EventHandler(this.chkNumberPadEnabled_CheckedChanged);
             // 
             // CounterComponentSettings
             // 
@@ -559,7 +540,6 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numInitialValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numIncrement)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -567,7 +547,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox chkGlobalHotKeys;
         private System.Windows.Forms.Label lblFont;
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -583,6 +562,15 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnColor1;
         private System.Windows.Forms.Button btnColor2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnColor3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.CheckBox chkGlobalHotKeys;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCounterText;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numInitialValue;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox txtIncrement;
@@ -591,15 +579,6 @@
         private System.Windows.Forms.Label lblCounterReset;
         private System.Windows.Forms.TextBox txtDecrement;
         private System.Windows.Forms.TextBox txtReset;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtCounterText;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numInitialValue;
-        private System.Windows.Forms.Label lblIncrementValue;
-        private System.Windows.Forms.NumericUpDown numIncrement;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnColor3;
+        private System.Windows.Forms.CheckBox chkNumberPadEnabled;
     }
 }

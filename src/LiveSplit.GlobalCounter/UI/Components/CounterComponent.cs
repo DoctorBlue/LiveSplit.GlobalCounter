@@ -16,11 +16,9 @@ namespace LiveSplit.UI.Components
             VerticalHeight = 10;
             Settings = new CounterComponentSettings(state.Settings.HotkeyProfiles.First().Value.AllowGamepadsAsHotkeys);
             Cache = new GraphicsCache();
-            CounterNameLabel = new SimpleLabel();
             Counter = new GlobalCounter();
             this.state = state;
             Settings.CounterReinitialiseRequired += Settings_CounterReinitialiseRequired;
-            Settings.IncrementUpdateRequired += Settings_IncrementUpdateRequired;
 
             // Subscribe to input hooks.
             Settings.Hook.KeyOrButtonPressed += hook_KeyOrButtonPressed;
@@ -35,25 +33,16 @@ namespace LiveSplit.UI.Components
 
         public float MinimumHeight { get; set; }
 
-        public float MinimumWidth 
-        { 
-            get
-            {
-                return CounterNameLabel.X + CounterValueLabel.ActualWidth;
-            } 
-        }
+        public float MinimumWidth => CounterNameLabel.X + CounterValueLabel.ActualWidth;
 
         public float HorizontalWidth { get; set; }
 
-        public IDictionary<string, Action> ContextMenuControls
-        {
-            get { return null; }
-        }
+        public IDictionary<string, Action> ContextMenuControls => null;
 
         public float PaddingTop { get; set; }
-        public float PaddingLeft { get { return 7f; } }
+        public float PaddingLeft => 7f;
         public float PaddingBottom { get; set; }
-        public float PaddingRight { get { return 7f; } }
+        public float PaddingRight => 7f;
 
         protected SimpleLabel CounterNameLabel = new SimpleLabel();
         protected SimpleLabel CounterValueLabel = new SimpleLabel();
@@ -62,7 +51,7 @@ namespace LiveSplit.UI.Components
 
         private LiveSplitState state;
 
-        private void DrawGeneral(Graphics g, Model.LiveSplitState state, float width, float height, LayoutMode mode)
+        private void DrawGeneral(Graphics g, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             // Set Background colour.
             if (Settings.BackgroundColor.A > 0
@@ -126,12 +115,12 @@ namespace LiveSplit.UI.Components
             CounterValueLabel.Draw(g);
         }
 
-        public void DrawHorizontal(Graphics g, Model.LiveSplitState state, float height, Region clipRegion)
+        public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
         {
             DrawGeneral(g, state, HorizontalWidth, height, LayoutMode.Horizontal);
         }
 
-        public void DrawVertical(System.Drawing.Graphics g, Model.LiveSplitState state, float width, Region clipRegion)
+        public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion)
         {
             DrawGeneral(g, state, width, VerticalHeight, LayoutMode.Vertical);
         }
@@ -148,12 +137,11 @@ namespace LiveSplit.UI.Components
             Counter = new GlobalCounter(Settings.InitialValue);
         }
 
-        public void Update(IInvalidator invalidator, Model.LiveSplitState state, float width, float height, LayoutMode mode)
+        public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             try
             {
-                if (Settings.Hook != null)
-                    Settings.Hook.Poll();
+                Settings.Hook?.Poll();
             }
             catch { }
 
@@ -188,11 +176,6 @@ namespace LiveSplit.UI.Components
         private void Settings_CounterReinitialiseRequired(object sender, EventArgs e)
         {
             Counter = new GlobalCounter(Settings.InitialValue);
-        }
-
-        private void Settings_IncrementUpdateRequired(object sender, EventArgs e)
-        {
-            Counter.SetIncrement(Settings.Increment);
         }
 
         // Basic support for keyboard/button input.
