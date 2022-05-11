@@ -19,11 +19,9 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
         [InlineData(99, 8)]
         public void WrapsIncrementsOver9ToGlobalRange(int incrementAmount, int expectedCount)
         {
-            var counter = new GlobalCounter();
-            counter.SetCount(9);
-            counter.SetIncrement(incrementAmount);
+            var counter = new GlobalCounter(9);
 
-            counter.Increment();
+            counter.Increment(incrementAmount);
 
             Assert.Equal(expectedCount, counter.Count);
         }

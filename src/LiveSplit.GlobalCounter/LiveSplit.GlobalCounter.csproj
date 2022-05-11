@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="KeyOrButtonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Components\Counter.cs" />
     <Compile Include="UI\Components\CounterComponent.cs" />
     <Compile Include="UI\Components\CounterComponentFactory.cs" />
     <Compile Include="UI\Components\CounterComponentSettings.cs">
@@ -79,6 +78,7 @@
       <DependentUpon>CounterComponentSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Components\GlobalCounter.cs" />
+    <Compile Include="UI\Components\ICounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Components\CounterComponentSettings.resx">

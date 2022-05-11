@@ -1,26 +1,26 @@
 ﻿namespace LiveSplit.UI.Components
 {
-    public sealed class GlobalCounter : Counter
+    public class GlobalCounter : ICounter
     {
-        public GlobalCounter(int initialValue = 0) : base(initialValue)
-        { }
+        private readonly int _initialValue;
 
-        public override void SetCount(int value)
+        public GlobalCounter(int initialValue = 0)
         {
-            if (value < 0)
-            {
-                value = 0;
-            }
-            else if (value > 9)
-            {
-                value = 9;
-            }
-            base.SetCount(value);
+            _initialValue = initialValue;
+            Reset();
         }
 
-        public override bool Decrement()
+        public int Count { get; private set; }
+
+        public bool Increment(int amount)
         {
-            Count -= increment;
+            Count = (Count + amount) % 10;
+            return true;
+        }
+
+        public bool Decrement()
+        {
+            Count -= 1;
             while (Count < 0)
             {
                 Count += 10;
@@ -28,12 +28,20 @@
             return true;
         }
 
-        public override bool Increment() => Increment(increment);
-
-        public override bool Increment(int amount)
+        public void Reset()
         {
-            Count = (Count + amount) % 10;
-            return true;
+            if (_initialValue < 0)
+            {
+                Count = 0;
+            }
+            else if (_initialValue > 9)
+            {
+                Count = 9;
+            }
+            else
+            {
+                Count = _initialValue;
+            }
         }
     }
 }

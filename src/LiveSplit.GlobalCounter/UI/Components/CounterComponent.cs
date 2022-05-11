@@ -195,7 +195,7 @@ namespace LiveSplit.UI.Components
             }
             if (e == Settings.IncrementKey)
             {
-                Counter.Increment();
+                Counter.Increment(1);
             }
             if (e == Settings.DecrementKey)
             {

@@ -20,10 +20,11 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
         public void WrapsNegativeResultToGlobalRange(int decrementAmount, int expectedCount)
         {
             var counter = new GlobalCounter();
-            counter.SetIncrement(decrementAmount);
+            for (int i = 0; i < decrementAmount; i++)
+            {
+                counter.Decrement();
+            }
             
-            counter.Decrement();
-
             Assert.Equal(expectedCount, counter.Count);
         }
     }

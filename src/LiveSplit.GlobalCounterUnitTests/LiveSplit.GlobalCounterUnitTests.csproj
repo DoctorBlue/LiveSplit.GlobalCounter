@@ -63,13 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalCounterTests\Constructor.cs" />
     <Compile Include="GlobalCounterTests\Decrement.cs" />
     <Compile Include="GlobalCounterTests\Increment.cs" />
+    <Compile Include="GlobalCounterTests\Reset.cs" />
     <Compile Include="KeyOrButtonExtensionsTests\GetNumberPressed.cs" />
     <Compile Include="KeyOrButtonExtensionsTests\NumberPadKeyPressed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlobalCounterTests\InitialValue.cs" />
-    <Compile Include="GlobalCounterTests\SetCount.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveSplit.GlobalCounter\LiveSplit.GlobalCounter.csproj">
