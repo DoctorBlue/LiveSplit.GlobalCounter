@@ -16,6 +16,7 @@ namespace LiveSplit.UI.Components
             Hook = new CompositeHook(allowGamepads);
 
             // Set default values.
+            ShowDropGroupsEnabled = false;
             NumberPadEnabled = false;
             GlobalHotkeysEnabled = false;
             CounterFont = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -38,6 +39,7 @@ namespace LiveSplit.UI.Components
             txtCounterText.DataBindings.Add("Text", this, "CounterText");
             numInitialValue.DataBindings.Add("Value", this, "InitialValue");
             chkGlobalHotKeys.DataBindings.Add("Checked", this, "GlobalHotkeysEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkShowDropGroupsEnabled.DataBindings.Add("Checked", this, nameof(ShowDropGroupsEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             chkNumberPadEnabled.DataBindings.Add("Checked", this, nameof(NumberPadEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             chkFont.DataBindings.Add("Checked", this, "OverrideCounterFont", false, DataSourceUpdateMode.OnPropertyChanged);
             lblFont.DataBindings.Add("Text", this, "CounterFontString", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -62,6 +64,7 @@ namespace LiveSplit.UI.Components
 
         public CompositeHook Hook { get; set; }
 
+        public bool ShowDropGroupsEnabled { get; set; }
         public bool NumberPadEnabled { get; set; }
         public bool GlobalHotkeysEnabled { get; set; }
 
@@ -94,6 +97,7 @@ namespace LiveSplit.UI.Components
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
+            ShowDropGroupsEnabled = SettingsHelper.ParseBool(element[nameof(ShowDropGroupsEnabled)]);
             NumberPadEnabled = SettingsHelper.ParseBool(element[nameof(NumberPadEnabled)]);
             GlobalHotkeysEnabled = SettingsHelper.ParseBool(element["GlobalHotkeysEnabled"]);
             CounterTextColor = SettingsHelper.ParseColor(element["CounterTextColor"]);
@@ -132,6 +136,7 @@ namespace LiveSplit.UI.Components
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
             return SettingsHelper.CreateSetting(document, parent, "Version", "1.0") ^
+            SettingsHelper.CreateSetting(document, parent, nameof(ShowDropGroupsEnabled), ShowDropGroupsEnabled) ^
             SettingsHelper.CreateSetting(document, parent, nameof(NumberPadEnabled), NumberPadEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "GlobalHotkeysEnabled", GlobalHotkeysEnabled) ^
             SettingsHelper.CreateSetting(document, parent, "OverrideCounterFont", OverrideCounterFont) ^

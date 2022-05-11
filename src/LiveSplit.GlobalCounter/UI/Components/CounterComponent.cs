@@ -148,7 +148,25 @@ namespace LiveSplit.UI.Components
             this.state = state;
 
             CounterNameLabel.Text = Settings.CounterText;
-            CounterValueLabel.Text = Counter.Count.ToString();
+            string dropGroupText = string.Empty;
+            if (Settings.ShowDropGroupsEnabled)
+            {
+                string[] dropGroups =
+                {
+                    "1 B 1 ♥",
+                    "♥ 1 ♥ F",
+                    "1 C 1 1",
+                    "F 1 5 ♥",
+                    "1 ♥ ♥ F",
+                    "♥ B C ♥",
+                    "♥ 1 1 ♥",
+                    "1 B 1 ♥",
+                    "1 ♥ 1 1",
+                    "♥ ♥ 5 ♥"
+                };
+                dropGroupText = $"({dropGroups[Counter.Count]}) ";
+            }
+            CounterValueLabel.Text = $"{dropGroupText}{Counter.Count}";
 
             Cache.Restart();
             Cache["CounterNameLabel"] = CounterNameLabel.Text;
