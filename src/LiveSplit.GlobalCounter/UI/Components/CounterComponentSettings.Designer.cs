@@ -62,6 +62,7 @@
             this.numInitialValue = new System.Windows.Forms.NumericUpDown();
             this.chkGlobalHotKeys = new System.Windows.Forms.CheckBox();
             this.chkNumberPadEnabled = new System.Windows.Forms.CheckBox();
+            this.txtNumPadIncrementInstruction = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -337,6 +338,7 @@
             this.tableLayoutPanel5.Controls.Add(this.numInitialValue, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.chkGlobalHotKeys, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.chkNumberPadEnabled, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.txtNumPadIncrementInstruction, 1, 2);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -497,8 +499,7 @@
             // 
             this.chkGlobalHotKeys.AutoSize = true;
             this.tableLayoutPanel5.SetColumnSpan(this.chkGlobalHotKeys, 2);
-            this.chkGlobalHotKeys.Location = new System.Drawing.Point(7, 78);
-            this.chkGlobalHotKeys.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkGlobalHotKeys.Location = new System.Drawing.Point(3, 78);
             this.chkGlobalHotKeys.Name = "chkGlobalHotKeys";
             this.chkGlobalHotKeys.Size = new System.Drawing.Size(138, 17);
             this.chkGlobalHotKeys.TabIndex = 5;
@@ -508,14 +509,23 @@
             // chkNumberPadEnabled
             // 
             this.chkNumberPadEnabled.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.chkNumberPadEnabled, 2);
             this.chkNumberPadEnabled.Location = new System.Drawing.Point(3, 53);
             this.chkNumberPadEnabled.Name = "chkNumberPadEnabled";
-            this.chkNumberPadEnabled.Size = new System.Drawing.Size(148, 17);
+            this.chkNumberPadEnabled.Size = new System.Drawing.Size(117, 17);
             this.chkNumberPadEnabled.TabIndex = 46;
-            this.chkNumberPadEnabled.Text = "Enable Number Pad Entry";
+            this.chkNumberPadEnabled.Text = "NumPad Increment";
             this.chkNumberPadEnabled.UseVisualStyleBackColor = true;
             this.chkNumberPadEnabled.CheckedChanged += new System.EventHandler(this.chkNumberPadEnabled_CheckedChanged);
+            // 
+            // txtNumPadIncrementInstruction
+            // 
+            this.txtNumPadIncrementInstruction.AutoSize = true;
+            this.txtNumPadIncrementInstruction.Location = new System.Drawing.Point(142, 54);
+            this.txtNumPadIncrementInstruction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.txtNumPadIncrementInstruction.Name = "txtNumPadIncrementInstruction";
+            this.txtNumPadIncrementInstruction.Size = new System.Drawing.Size(254, 13);
+            this.txtNumPadIncrementInstruction.TabIndex = 47;
+            this.txtNumPadIncrementInstruction.Text = "Increment 1-9. Overrides hotkeys set to NumPad1-9.";
             // 
             // CounterComponentSettings
             // 
@@ -580,5 +590,6 @@
         private System.Windows.Forms.TextBox txtDecrement;
         private System.Windows.Forms.TextBox txtReset;
         private System.Windows.Forms.CheckBox chkNumberPadEnabled;
+        private System.Windows.Forms.Label txtNumPadIncrementInstruction;
     }
 }
