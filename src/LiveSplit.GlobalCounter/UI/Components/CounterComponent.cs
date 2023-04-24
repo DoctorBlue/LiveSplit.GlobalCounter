@@ -18,6 +18,7 @@ namespace LiveSplit.UI.Components
             Cache = new GraphicsCache();
             Counter = new GlobalCounter();
             this.state = state;
+            this.state.OnStart += (sender, args) => { Counter.Reset(); };
             Settings.CounterReinitialiseRequired += Settings_CounterReinitialiseRequired;
 
             // Subscribe to input hooks.
@@ -84,7 +85,7 @@ namespace LiveSplit.UI.Components
 
             // Assume most users won't count past four digits (will cause a layout resize in Horizontal Mode).
             float fourCharWidth = g.MeasureString("1000", CounterFont).Width;
-            HorizontalWidth = CounterNameLabel.X + CounterNameLabel.ActualWidth + (fourCharWidth > CounterValueLabel.ActualWidth ? fourCharWidth : CounterValueLabel.ActualWidth) + 5; 
+            HorizontalWidth = CounterNameLabel.X + CounterNameLabel.ActualWidth + (fourCharWidth > CounterValueLabel.ActualWidth ? fourCharWidth : CounterValueLabel.ActualWidth) + 5;
 
             // Set Counter Name Label
             CounterNameLabel.HorizontalAlignment = mode == LayoutMode.Horizontal ? StringAlignment.Near : StringAlignment.Near;
