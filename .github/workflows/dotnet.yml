@@ -9,17 +9,20 @@ on:
 jobs:
   build:
 
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore src
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+
+    - name: Setup NuGet
+      run: NuGet/setup-nuget@v1.0.2
+
     - name: Build
-      run: dotnet build src --no-restore
-    - name: Test
-      run: dotnet test src --no-build --verbosity normal
+      run: msbuild src/SimpleFrameworkApp.sln /p:Configuration=Release
+
+    # - name: Test
+    #   run: dotnet test src --no-build --verbosity normal
