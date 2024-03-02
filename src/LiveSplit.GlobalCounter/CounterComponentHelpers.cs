@@ -4,8 +4,9 @@ namespace LiveSplit
 {
     public static class CounterComponentHelpers
     {
-        public static string GetCounterDisplayText(int count, bool showDropGroupsEnabled)
+        public static string GetCounterDisplayText(decimal count, bool showDropGroupsEnabled)
         {
+            return $"{count:F1}";
             if (count < 0 || count > 9)
             {
                 throw new ArgumentOutOfRangeException(nameof(count), count, "Count must be within global range of 0-9!");
@@ -27,7 +28,7 @@ namespace LiveSplit
                     "1 ♥ 1 1",
                     "♥ ♥ 5 ♥"
                 };
-                dropGroupText = $"({dropGroups[count]}) ";
+                dropGroupText = $"({dropGroups[(int)count]}) ";
             }
 
             return $"{dropGroupText}{count}";

@@ -2,9 +2,9 @@
 {
     public interface ICounter
     {
-        int Count { get; }
+        decimal Count { get; }
 
-        bool Increment(int amount);
+        bool Increment(decimal amount);
         bool Decrement();
         void Reset();
     }

@@ -45,7 +45,7 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
             Assert.Equal(9, counter.Count);
         }
 
-        private static int GetInitialValue(GlobalCounter counter)
+        private static decimal GetInitialValue(GlobalCounter counter)
         {
             const string fieldName = "_initialValue";
             var prop = typeof(GlobalCounter).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -54,8 +54,7 @@ namespace LiveSplit.GlobalCounterUnitTests.GlobalCounterTests
                 throw new InvalidOperationException($"Could not find \"{fieldName}\" field on {nameof(GlobalCounter)} class.");
             }
 
-            int actual = (int) prop.GetValue(counter);
-            return actual;
+            return (decimal) prop.GetValue(counter);
         }
     }
 }

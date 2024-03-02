@@ -2,29 +2,25 @@
 {
     public class GlobalCounter : ICounter
     {
-        private readonly int _initialValue;
+        private readonly decimal _initialValue;
 
-        public GlobalCounter(int initialValue = 0)
+        public GlobalCounter(decimal initialValue = 0)
         {
             _initialValue = initialValue;
             Reset();
         }
 
-        public int Count { get; private set; }
+        public decimal Count { get; private set; }
 
-        public bool Increment(int amount)
+        public bool Increment(decimal amount)
         {
-            Count = (Count + amount) % 10;
+            Count += amount;
             return true;
         }
 
         public bool Decrement()
         {
-            Count -= 1;
-            while (Count < 0)
-            {
-                Count += 10;
-            }
+            Count -= .5m;
             return true;
         }
 
