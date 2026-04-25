@@ -62,9 +62,6 @@
     <Reference Include="UpdateManager">
       <HintPath>..\..\libs\LiveSplit\1.8.37\UpdateManager.dll</HintPath>
     </Reference>
-    <Reference Include="WinFormsColor">
-      <HintPath>..\..\libs\LiveSplit\1.8.37\WinFormsColor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CounterComponentHelpers.cs" />
